@@ -93,4 +93,59 @@ public class NguoiDungDao {
 		dc.cn.close();
 		return nguoidung;
 	}
+
+	public int themThanhVien(String hoten,Date ngaysinh, String cmt,String sodienthoai,String email,String diachi,boolean gioitinh,String user,String pass) throws Exception{
+		DungChung dc = new DungChung();
+		dc.KetNoi();
+		String sql = "INSERT INTO NGUOIDUNG(UserName,PassWord,HoTen,NgaySinh,SDT,Email,DiaChi,GioiTinh,Quyen,CMT) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement stm = dc.cn.prepareStatement(sql);
+		stm.setString(1, user);
+		stm.setString(2,pass );
+		stm.setString(3,hoten );
+		stm.setDate(4, new java.sql.Date(ngaysinh.getTime()));
+		stm.setString(5, sodienthoai);
+		stm.setString(6, email);
+		stm.setString(7, diachi);
+		stm.setBoolean(8, gioitinh);
+		stm.setInt(9, 1);
+		stm.setString(10, cmt);
+		
+		int i = stm.executeUpdate();
+		stm.close();
+		dc.cn.close();
+		return i;
+
+	}
+	
+	public int xoaThanhVien(String user) throws Exception{
+		DungChung dc = new DungChung();
+		dc.KetNoi();
+		String sql = "DELETE FROM NGUOIDUNG WHERE UserName = ?";
+		PreparedStatement stm = dc.cn.prepareStatement(sql);
+		stm.setString(1, user);
+		int i = stm.executeUpdate();
+		stm.close();
+		dc.cn.close();
+		return i;
+	}
+	
+	public int suaThanhVien(String hoten,Date ngaysinh, String cmt,String sodienthoai,String email,String diachi,boolean gioitinh,String user) throws Exception{
+		DungChung dc = new DungChung();
+		dc.KetNoi();
+		String sql = "UPDATE NGUOIDUNG SET HoTen = ?,NgaySinh = ?,SDT = ?,Email = ?,DiaChi = ?,GioiTinh = ?,CMT = ? WHERE UserName = ?";
+		PreparedStatement stm = dc.cn.prepareStatement(sql);
+		stm.setString(1, hoten);
+		stm.setDate(2, new java.sql.Date(ngaysinh.getTime()));
+		stm.setString(3, sodienthoai);
+		stm.setString(4, email);
+		stm.setString(5, diachi);
+		stm.setBoolean(6, gioitinh);
+		stm.setString(7, cmt);
+		stm.setString(8, user);
+		int i = stm.executeUpdate();
+		stm.close();
+		dc.cn.close();
+		return i;
+	}
 }
+
