@@ -18,6 +18,11 @@ public class CayXanhBean {
 		NgayTrong = ngayTrong;
 		TuyenDuong = tuyenDuong;
 	}
+	
+	public CayXanhBean() {
+		super();
+	}
+
 	public String getMaCay() {
 		return MaCay;
 	}
