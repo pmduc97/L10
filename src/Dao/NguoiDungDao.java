@@ -67,7 +67,7 @@ public class NguoiDungDao {
 		NguoiDungBean nguoidung;
 		DungChung dc = new DungChung();
 		dc.KetNoi();
-		String sql = "select * from NGUOIDUNG where UserName = ?, PassWord = ?, Quyen = ?";
+		String sql = "select * from NGUOIDUNG where UserName = ? and PassWord = ? and Quyen = ?";
 		PreparedStatement stm = dc.cn.prepareStatement(sql);
 		stm.setString(1, user);
 		stm.setString(2, pass);
