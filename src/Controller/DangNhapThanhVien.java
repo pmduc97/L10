@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Bean.NguoiDungBean;
 import Bo.NguoiDungBo;
@@ -41,11 +42,12 @@ public class DangNhapThanhVien extends HttpServlet {
 				
 				if(nguoidung != null) {
 					request.setAttribute("kiemtra", "1");
-					request.setAttribute("nguoidung", nguoidung);
+					HttpSession session = request.getSession();
+					
+					session.setAttribute("thanhvien", nguoidung);
 				}
 				else {
 					request.setAttribute("kiemtra", "0");
-					request.setAttribute("nguoidung", nguoidung);
 				}
 			}
 		} catch (Exception e) {
@@ -53,7 +55,7 @@ public class DangNhapThanhVien extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("DangNhapThanhVien.jsp").forward(request, response);;
+		request.getRequestDispatcher("login-thanhvien.jsp").forward(request, response);;
 	}
 
 	/**

@@ -31,4 +31,8 @@ public class NguoiDungBo {
 	public int suaThanhVien(String hoten,Date ngaysinh, String cmt,String sodienthoai,String email,String diachi,boolean gioitinh,String user) throws Exception{
 		return nd.suaThanhVien(hoten, ngaysinh, cmt, sodienthoai, email, diachi, gioitinh, user);
 	}
+	
+	public int doiMatKhau(String taikhoan,String matkhaumoi) throws Exception{
+		return nd.doiMatKhau(taikhoan, matkhaumoi);
+	}
 }

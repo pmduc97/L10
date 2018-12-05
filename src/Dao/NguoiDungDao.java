@@ -147,5 +147,18 @@ public class NguoiDungDao {
 		dc.cn.close();
 		return i;
 	}
+	
+	public int doiMatKhau(String taikhoan,String matkhaumoi) throws Exception{
+		DungChung dc = new DungChung();
+		dc.KetNoi();
+		String sql = "UPDATE NGUOIDUNG SET PassWord = ? WHERE UserName = ?";
+		PreparedStatement stm = dc.cn.prepareStatement(sql);
+		stm.setString(1, matkhaumoi);
+		stm.setString(2, taikhoan);
+		int i = stm.executeUpdate();
+		stm.close();
+		dc.cn.close();
+		return i;
+	}
 }
 
