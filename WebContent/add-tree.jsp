@@ -1,3 +1,5 @@
+<%@page import="Bean.LoaiCayBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Bean.NguoiDungBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -5,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Thêm thành viên</title>
+<title>Thêm cây xanh</title>
 <link rel="stylesheet" href="css/style-index.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="js/scrip-index.js"></script>
@@ -18,24 +20,24 @@
         }
         
         function checkEmpty() {
-            var t = document.getElementById("email").value;
+            var t = document.getElementById("macay").value;
             if(t==null || t==""){
-                alert("Email không được trống !");
+                alert("Vui lòng nhập mã cây !");
                 return false;
             }
-            var u = document.getElementById("sdt").value;
+            var u = document.getElementById("tencay").value;
             if(u==null || u==""){
-                alert("Điện thoại không được trống!");
+                alert("Vui lòng nhập tên cây!");
                 return false;
             }
-            var u1 = document.getElementById("taikhoan").value;
+            var u1 = document.getElementById("chieucao").value;
             if(u1==null || u1==""){
-                alert("Tài khoản không được trống!");
+                alert("Vui lòng nhập chiều cao cây!");
                 return false;
             }
-            var u2 = document.getElementById("matkhau").value;
+            var u2 = document.getElementById("tuyenduong").value;
             if(u2==null || u2==""){
-                alert("Mật khẩu không được trống!");
+                alert("Vui lòng nhập tuyến đường!");
                 return false;
             }
         }
@@ -44,12 +46,12 @@
         
         <script type="text/javascript">
 	var count = 3;
-	var redirect = "QuanLyThanhVien";
+	var redirect = "QuanLyCayXanh";
 	function countDown(){
 		var timer = document.getElementById("timer");
 		if(count > 0){
 			count--;
-			timer.innerHTML = "Trở về trang hiển thị thành viên sau " + count + " giây";
+			timer.innerHTML = "Trở về trang hiển thị cây xanh sau " + count + " giây";
 			setTimeout("countDown()", 1000);
 		}else{
 			window.location.href = redirect;
@@ -60,6 +62,7 @@
 <body>
 <%
 NguoiDungBean admin = (NguoiDungBean)session.getAttribute("admin");
+ArrayList<LoaiCayBean> lstLoai = (ArrayList<LoaiCayBean>)request.getAttribute("lstLoai");
 %>
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
@@ -98,8 +101,8 @@ NguoiDungBean admin = (NguoiDungBean)session.getAttribute("admin");
 						<!-- Main Menu -->
 						<div class="side-menu-container">
 							<ul class="nav navbar-nav">
-								<li class=""><a href="QuanLyThanhVien"><span class="glyphicon glyphicon-dashboard"></span> Quản Lý Thành Viên</a></li>
-								<li><a href="QuanLyCayXanh"><span class="glyphicon glyphicon-plane"></span> Quản Lý Cây Xanh</a></li>
+								<li ><a href="QuanLyThanhVien"><span class="glyphicon glyphicon-dashboard"></span> Quản Lý Thành Viên</a></li>
+								<li class="active"><a href="QuanLyCayXanh"><span class="glyphicon glyphicon-plane"></span> Quản Lý Cây Xanh</a></li>
 								<li><a href="DoiMatKhauAdmin"><span class="glyphicon glyphicon-cloud"></span> Đổi mật khẩu</a></li>		
 							</ul>
 						</div><!-- /.navbar-collapse -->
@@ -110,15 +113,15 @@ NguoiDungBean admin = (NguoiDungBean)session.getAttribute("admin");
   		<div class="col-md-10 content">
   			<div class="panel panel-info">
 	            <div class="panel-heading">
-	                <div class="panel-title">Thêm thành viên mới</div>
+	                <div class="panel-title">Thêm cây xanh mới</div>
 	            </div>  
 	            <div class="panel-body" >   
 	            <%
 if(request.getAttribute("kiemtra") != null){
-	if(request.getAttribute("kiemtra").equals("0"))	
-		out.print("Thành viên này đã tồn tại trong hệ thống!");
+	if(request.getAttribute("kiemtra").equals("-1"))	
+		out.print("Mã cây xanh này đã tồn tại trong hệ thống!");
 	else if(request.getAttribute("kiemtra").equals("1")){
-		out.print("Thành viên đã được thêm vào hệ thống");
+		out.print("Cây xanh đã được thêm vào hệ thống");
 		%>
 		<p id="timer"><script type="text/javascript">countDown();</script></p>
 		<%
@@ -129,66 +132,52 @@ if(request.getAttribute("kiemtra") != null){
 %>                  
 	                    <form id="form" class="form-horizontal" action="" method="post" >                      
 	                        <div id="div_id_username" class="form-group required">
-	                            <label for="id_username" class="control-label col-md-4  requiredField"> Tên thành viên<span class="asteriskField"></span> </label>
+	                            <label for="id_username" class="control-label col-md-4  requiredField"> Mã cây<span class="asteriskField"></span> </label>
 	                            <div class="controls col-md-8 ">
-	                                <input class="input-md  textinput textInput form-control"  id="hoten" maxlength="30" name="hoten" style="margin-bottom: 10px" type="text" />
+	                                <input class="input-md  textinput textInput form-control"  id="macay" maxlength="30" name="macay" style="margin-bottom: 10px" type="text" />
 	                            </div>
 	                        </div>
-	             			<div id="div_id_date" class="form-group required">
-	                            <label for="id_username" class="control-label col-md-4  requiredField"> Ngày sinh<span class="asteriskField"></span> </label>
+	                        <div id="div_id_username" class="form-group required">
+	                            <label for="id_username" class="control-label col-md-4  requiredField"> Tên cây<span class="asteriskField"></span> </label>
 	                            <div class="controls col-md-8 ">
-	                                <input class="input-md  textinput textInput form-control" value="1970-01-01" id="ngaysinh" maxlength="30" name="ngaysinh" style="margin-bottom: 10px" type="date" />
+	                                <input class="input-md  textinput textInput form-control"  id="tencay" maxlength="30" name="tencay" style="margin-bottom: 10px" type="text" />
 	                            </div>
 	                        </div>
 	                        <div id="div_id_sex" class="form-group required">
-	                            <label for="id_sex" class="control-label col-md-4  requiredField"> Giới tính<span class="asteriskField"></span> </label>
+	                            <label for="id_sex" class="control-label col-md-4  requiredField"> Loại cây<span class="asteriskField"></span> </label>
 	                            <div class="controls col-md-8 ">
-	                            <select class="input-md  textinput textInput form-control" name="gioitinh" id="gioitinh">
-	                            <option value="1">Nam</option>
-	                            <option value="0">Nữ</option>
+	                            <select class="input-md  textinput textInput form-control" name="loaicay" id="loaicay">
+	                            <%
+	                            for(LoaiCayBean l: lstLoai){
+	                            %>
+	                            <option value="<%=l.getMaLoai()%>"><%=l.getTenLoai()%></option>
+	                            <%} %>
 	                            </select>
 	                            </div>
 	                        </div>
-	                        <div id="div_id_cmt" class="form-group required">
-	                            <label for="id_cmt" class="control-label col-md-4  requiredField">CMT<span class="asteriskField"></span> </label>
-	                            <div class="controls col-md-8 "> 
-	                                <input class="input-md textinput textInput form-control"  id="cmt" name="cmt" style="margin-bottom: 10px" type="text" />
+	             			<div id="div_id_date" class="form-group required">
+	                            <label for="id_username" class="control-label col-md-4  requiredField"> Thời gian trồng<span class="asteriskField"></span> </label>
+	                            <div class="controls col-md-8 ">
+	                                <input class="input-md  textinput textInput form-control" value="1970-01-01" id="thoigian" maxlength="30" name="thoigian" style="margin-bottom: 10px" type="date" />
 	                            </div>
 	                        </div>
-	                        <div id="div_id_email" class="form-group required">
-	                             <label for="id_email" class="control-label col-md-4  requiredField"> Email<span class="asteriskField">**</span> </label>
-	                             <div class="controls col-md-8 ">
-	                                <input class="input-md textinput textInput form-control" id="email"  name="email" style="margin-bottom: 10px" type="text" />
-	                            </div>
-	                        </div>
-	                        <div id="div_id_address" class="form-group required">
-	                             <label for="id_address" class="control-label col-md-4  requiredField"> Địa chỉ<span class="asteriskField"></span> </label>
-	                             <div class="controls col-md-8 ">
-	                                <input class="input-md textinput textInput form-control" id="diachi" name="diachi" style="margin-bottom: 10px" type="text" />
-	                            </div>
-	                        </div>
-	                        <div id="div_id_address" class="form-group required">
-	                             <label for="id_address" class="control-label col-md-4  requiredField"> Điện thoại<span class="asteriskField">**</span> </label>
-	                             <div class="controls col-md-8 ">
-	                                <input class="input-md textinput textInput form-control" id="sdt"  name="sdt" style="margin-bottom: 10px" type="text" />
+	                        
+	                        <div id="div_id_username" class="form-group required">
+	                            <label for="id_username" class="control-label col-md-4  requiredField"> Chiều cao<span class="asteriskField"></span> </label>
+	                            <div class="controls col-md-8 ">
+	                                <input class="input-md  textinput textInput form-control"  id="chieucao" maxlength="30" name="chieucao" style="margin-bottom: 10px" type="text" />
 	                            </div>
 	                        </div>
 	                        <div id="div_id_username" class="form-group required">
-	                            <label for="id_username" class="control-label col-md-4  requiredField"> Tài khoản<span class="asteriskField">**</span> </label>
+	                            <label for="id_username" class="control-label col-md-4  requiredField"> Tuyến đường<span class="asteriskField"></span> </label>
 	                            <div class="controls col-md-8 ">
-	                                <input class="input-md  textinput textInput form-control" id="taikhoan"  maxlength="30" name="taikhoan" style="margin-bottom: 10px" type="text" />
-	                            </div>
-	                        </div> 
-	                        <div id="div_id_username" class="form-group required">
-	                            <label for="id_username" class="control-label col-md-4  requiredField"> Mật khẩu<span class="asteriskField">**</span> </label>
-	                            <div class="controls col-md-8 ">
-	                                <input class="input-md  textinput textInput form-control" id="matkhau"  maxlength="30" name="matkhau" style="margin-bottom: 10px" type="password" />
+	                                <input class="input-md  textinput textInput form-control"  id="tuyenduong" maxlength="30" name="tuyenduong" style="margin-bottom: 10px" type="text" />
 	                            </div>
 	                        </div>
 	                        <div class="form-group"> 
 	                            <div class="aab controls col-md-4 "></div>
 	                            <div class="controls col-md-8 ">
-	                                <a class="btn btn-primary btn btn-info" href="MenuThanhVien">Quay lại</a>
+	                                <a class="btn btn-primary btn btn-info" href="QuanLyCayXanh">Quay lại</a>
 	                                <input class="btn btn-sm btn-primary" onclick="resetForm()" type="button" value="Reset">
 	                                <input type="submit" onclick="return checkEmpty()" name="them" value="Thêm" class="btn btn btn-danger"  />
 	                            </div>

@@ -114,8 +114,22 @@ public class CayXanhDao {
 		return i;
 	}
 	
-	public int themCayXanh() throws Exception{
-		return 0;
+	public int themCayXanh(String macay,String tencay,String loaicay,Date ngaytrong, float chieucao, String tuyenduong) throws Exception{
+		DungChung dc = new DungChung();
+		dc.KetNoi();
+		String sql = "INSERT INTO CAYXANH(MaCay,TenCay,MaLoai,ChieuCao,NgayTrong,TuyenDuong) VALUES (?,?,?,?,?,?)";
+		PreparedStatement stm = dc.cn.prepareStatement(sql);
+		stm.setString(1, macay);
+		stm.setString(2,tencay );
+		stm.setString(3,loaicay );
+		stm.setDate(5, new java.sql.Date(ngaytrong.getTime()));
+		stm.setFloat(4, chieucao);
+		stm.setString(6, tuyenduong);
+		
+		int i = stm.executeUpdate();
+		stm.close();
+		dc.cn.close();
+		return i;
 	}
 	
 	public int suaCayXanh() throws Exception{

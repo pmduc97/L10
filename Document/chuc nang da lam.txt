@@ -1,0 +1,17 @@
+QLTT Admin
+- Đăng nhập admin
+- Đổi mật khẩu admin
+
+QLTT Thành viên
+- Đăng nhập thành viên
+- Đăng ký thành viên
+- Xem chi tiết thông tin thành viên
+
+Quản lý thành viên
+- Hiển thị danh sách thành viên
+- Thêm thành viên
+- Xem chi tiết thành viên
+
+Quản lý cây xanh
+- Thêm cây xanh
+- Hiển thị danh sách cây xanh

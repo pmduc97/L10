@@ -1,6 +1,7 @@
 package Bo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import Bean.CayXanhBean;
 import Dao.CayXanhDao;
@@ -27,8 +28,8 @@ public class CayXanhBo {
 		return cay.xoaCayXanh(macay);
 	}
 	
-	public int themCayXanh() throws Exception{
-		return cay.themCayXanh();
+	public int themCayXanh(String macay,String tencay,String loaicay,Date ngaytrong, float chieucao, String tuyenduong) throws Exception{
+		return cay.themCayXanh(macay, tencay, loaicay, ngaytrong, chieucao, tuyenduong);
 	}
 	
 	public int suaCayXanh() throws Exception{
