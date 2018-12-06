@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="css/style-login-admin.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
-<script type="text/javascript" src="js/scrip-login.js"></script>
 <script type="text/javascript" src="bootstrap/css/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 <script type="text/javascript">
@@ -35,7 +34,7 @@
         
         <script type="text/javascript">
 	var count = 3;
-	var redirect = "MenuThanhVien";
+	var redirect = "ThongTinCaNhanThanhVien";
 	function countDown(){
 		var timer = document.getElementById("timer");
 		if(count > 0){
@@ -71,7 +70,7 @@ if(request.getAttribute("kiemtra") != null){
                 <input type="text" id="taikhoan" class="form-control" placeholder="Tài khoản" name="taikhoan" required autofocus>
                 <input type="password" id="matkhau" class="form-control" placeholder="Mật khẩu" name="matkhau" required>
                 <input class="btn btn-lg btn-primary btn-block btn-signin" onclick="return checkEmpty()" type="submit" name="dangnhap" value="Đăng nhập">
-                <button class="btn btn-lg btn-primary btn-block btn-signin"><a  style="color: white;" href="TrangChu">Hủy</a></button>
+                <a class="btn btn-lg btn-primary btn-block btn-signin" style="color: white;" href="TrangChu">Hủy</a>
                 <button class="btn btn-lg btn-primary btn-block btn-signin"><a  style="color: white;" href="DangKyThanhVien">Đăng Ký Thành Viên</a></button>
                 <input class="btn btn-lg btn-primary btn-block btn-signin" onclick="resetForm()" type="button" value="Reset">
             </form><!-- /form -->

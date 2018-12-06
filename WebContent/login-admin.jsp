@@ -71,7 +71,7 @@ if(request.getAttribute("kiemtra") != null){
                 <input type="text" id="taikhoan" class="form-control" placeholder="Tài khoản" name="taikhoan" required autofocus>
                 <input type="password" id="matkhau" class="form-control" placeholder="Mật khẩu" name="matkhau" required>
                 <input class="btn btn-lg btn-primary btn-block btn-signin" onclick="return checkEmpty()" type="submit" name="dangnhap" value="Đăng nhập">
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"><a href="TrangChu" style="color: white;">Hủy</a></button>
+                <a class="btn btn-lg btn-primary btn-block btn-signin" href="TrangChu" style="color: white;">Hủy</a>
                 <input class="btn btn-lg btn-primary btn-block btn-signin" onclick="resetForm()" type="button" value="Reset">
             </form><!-- /form -->
         </div><!-- /card-container -->

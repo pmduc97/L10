@@ -1,7 +1,8 @@
 package Controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +14,16 @@ import Bean.NguoiDungBean;
 import Bo.NguoiDungBo;
 
 /**
- * Servlet implementation class QuanLyThanhVien
+ * Servlet implementation class ThemThanhVien
  */
-@WebServlet("/QuanLyThanhVien")
-public class QuanLyThanhVien extends HttpServlet {
+@WebServlet("/ThemThanhVien")
+public class ThemThanhVien extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuanLyThanhVien() {
+    public ThemThanhVien() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,45 +36,40 @@ public class QuanLyThanhVien extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		try {
-			if(request.getParameter("xoa") != null) {
+			if(request.getParameter("them") != null) {
 				String taikhoan = request.getParameter("taikhoan");
-				int xoa = nd.xoaThanhVien(taikhoan);
-				if(xoa != 0) {
-					request.setAttribute("kiemtraxoa", "1");
+				String matkhau = request.getParameter("matkhau");
+				String hoten = request.getParameter("hoten") ;
+				String ngaysinh = request.getParameter("ngaysinh");
+				if(ngaysinh == null)
+					ngaysinh = "1990-01-01";
+				String cmt = request.getParameter("cmt");
+				String dt = request.getParameter("sdt");
+				String email = request.getParameter("email");
+				String diachi = request.getParameter("diachi");
+				String gioitinh = request.getParameter("gioitinh");
+				boolean gt = gioitinh.equals("1") ? true:false;
+				SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
+				Date ns = sim.parse(ngaysinh);
+				NguoiDungBean nguoi = nd.get1ThanhVien(taikhoan);
+				if(nguoi != null) {
+					request.setAttribute("kiemtra", "0");
 				}
 				else {
-					request.setAttribute("kiemtraxoa", "0");
-					
+					int i = nd.themThanhVien(hoten, ns, cmt, dt, email, diachi, gt, taikhoan, matkhau);
+					if(i != 0) {
+						request.setAttribute("kiemtra", "1");
+					}
+					else {
+						request.setAttribute("kiemtra", "-1");
+					}
 				}
 			}
-			if(request.getParameter("key") != null) {
-				String key = request.getParameter("key");
-				NguoiDungBean n = nd.get1ThanhVien(key);
-				ArrayList<NguoiDungBean> lstTV = new ArrayList<NguoiDungBean>();
-				if(n != null) {
-					lstTV.add(n);
-					request.setAttribute("lstTV", lstTV);
-					request.setAttribute("kiemtra", "1");
-				}
-				else {
-					request.setAttribute("lstTV", lstTV);
-					request.setAttribute("kiemtra", key);
-					
-				}
-				
-			}
-			
-			else {
-				request.setAttribute("lstTV", nd.getAllThanhVien());
-			}
-			
-			
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("quanlythanhvien.jsp").forward(request, response);
+		request.getRequestDispatcher("themthanhvien.jsp").forward(request, response);;
 	}
 
 	/**

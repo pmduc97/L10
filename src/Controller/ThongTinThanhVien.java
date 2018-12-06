@@ -1,28 +1,25 @@
 package Controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Bean.NguoiDungBean;
 import Bo.NguoiDungBo;
 
 /**
- * Servlet implementation class QuanLyThanhVien
+ * Servlet implementation class ThongTinThanhVien
  */
-@WebServlet("/QuanLyThanhVien")
-public class QuanLyThanhVien extends HttpServlet {
+@WebServlet("/ThongTinThanhVien")
+public class ThongTinThanhVien extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuanLyThanhVien() {
+    public ThongTinThanhVien() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,45 +32,13 @@ public class QuanLyThanhVien extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		try {
-			if(request.getParameter("xoa") != null) {
-				String taikhoan = request.getParameter("taikhoan");
-				int xoa = nd.xoaThanhVien(taikhoan);
-				if(xoa != 0) {
-					request.setAttribute("kiemtraxoa", "1");
-				}
-				else {
-					request.setAttribute("kiemtraxoa", "0");
-					
-				}
-			}
-			if(request.getParameter("key") != null) {
-				String key = request.getParameter("key");
-				NguoiDungBean n = nd.get1ThanhVien(key);
-				ArrayList<NguoiDungBean> lstTV = new ArrayList<NguoiDungBean>();
-				if(n != null) {
-					lstTV.add(n);
-					request.setAttribute("lstTV", lstTV);
-					request.setAttribute("kiemtra", "1");
-				}
-				else {
-					request.setAttribute("lstTV", lstTV);
-					request.setAttribute("kiemtra", key);
-					
-				}
-				
-			}
-			
-			else {
-				request.setAttribute("lstTV", nd.getAllThanhVien());
-			}
-			
-			
-			
+			String taikhoan = request.getParameter("taikhoan");
+			request.setAttribute("thanhvien",nd.get1ThanhVien(taikhoan));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("quanlythanhvien.jsp").forward(request, response);
+		request.getRequestDispatcher("thongtinthanhvien.jsp").forward(request, response);
 	}
 
 	/**

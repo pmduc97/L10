@@ -102,7 +102,7 @@ $(document).ready(function() {
 					</a>
 				</li>
 				<li class="dropdown ">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+					<a href="DangXuat" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						Đăng xuất
 					</a>
 				</li>

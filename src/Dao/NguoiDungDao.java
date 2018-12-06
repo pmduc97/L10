@@ -146,6 +146,7 @@ public class NguoiDungDao {
 		stm.close();
 		dc.cn.close();
 		return i;
+		
 	}
 	
 	public int doiMatKhau(String taikhoan,String matkhaumoi) throws Exception{
